@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Web-based Python Compiler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #61dafb;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+        }
+        #editor {
+            flex: 1;
+            height: 50%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            font-size: 14px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto;
+        }
+        #output {
+            flex: 1;
+            height: 50%;
+            border: 1px solid #ccc;
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            font-size: 14px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto;
+            white-space: pre-wrap; /* Preserve newlines and spaces */
+        }
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #61dafb;
+            border: none;
+            border-radius: 5px;
+            color: #282c34;
+        }
+        button:hover {
+            background-color: #21a1f1;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #loading {
+            display: none;
+            color: #61dafb;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <!-- Use the latest Pyodide version -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.0/full/pyodide.js"></script>
+</head>
+<body>
+    <h1>Advanced Web-based Python Compiler</h1>
+    <div id="container">
+        <div id="controls">
+            <input type="text" id="package" placeholder="Enter package name (e.g., numpy)">
+            <button id="installBtn">Install Package</button>
+            <button id="runBtn">Run Code</button>
+        </div>
+        <div id="loading">Loading...</div>
+        <textarea id="editor">
+print("Jiku")
+print("JikuXD")
+</textarea>
+        <div id="output"></div>
+    </div>
+    <script>
+        let pyodideReadyPromise;
+
+        async function loadPyodideAndPackages() {
+            document.getElementById("loading").style.display = "block";
+            self.pyodide = await loadPyodide();
+            await pyodide.loadPackage('micropip');
+            await pyodide.runPythonAsync(`
+                import micropip;
+                await micropip.install('pyodide-http');
+            `);
+            document.getElementById("loading").style.display = "none";
+        }
+
+        async function installPackage() {
+            const packageName = document.getElementById("package").value;
+            try {
+                document.getElementById("loading").style.display = "block";
+                await pyodide.runPythonAsync(`import micropip; await micropip.install('${packageName}')`);
+                console.log(`Package ${packageName} installed successfully`);
+            } catch (err) {
+                console.error(`Error installing package ${packageName}:`, err);
+            } finally {
+                document.getElementById("loading").style.display = "none";
+            }
+        }
+
+        async function runCode() {
+            let outputElement = document.getElementById("output");
+            outputElement.innerHTML = "";
+            let code = document.getElementById("editor").value;
+            try {
+                await pyodideReadyPromise;
+                let output = await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+
+sys.stdout = StringIO()
+sys.stderr = StringIO()
+
+try:
+    exec("""${code.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}""")
+except Exception as e:
+    print(e)
+
+output = sys.stdout.getvalue() + sys.stderr.getvalue()
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
+output
+                `);
+                outputElement.innerHTML = `<span style="color: lightgreen;">${output}</span>`;
+            } catch (err) {
+                outputElement.innerHTML = `<span style="color: red;">${err}</span>`;
+            }
+        }
+
+        document.getElementById("installBtn").addEventListener("click", installPackage);
+        document.getElementById("runBtn").addEventListener("click", runCode);
+
+        pyodideReadyPromise = loadPyodideAndPackages();
+    </script>
+</body>
+</html>

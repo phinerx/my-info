@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Jakaria Fiad</title>
+</head>
+<style>
+  body{
+    background-color: black;
+    color: pink;
+}
+.name-header{
+    color: red;
+    text-align: center;
+
+}
+  
+.icon {
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+.photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .glowing-btn {
+    text-align: center;
+    position: relative;
+    color: #fff; /* Updated text color */
+    cursor: pointer;
+    padding: 0.5em 1em;
+    margin: 10px 0;
+    border: 0.2em solid #93c537; /* Updated border color */
+    border-radius: 0.5em;
+    background: #27d317dd; /* Updated background color */
+    font-family: "Raleway", sans-serif;
+    font-size: 1.2em;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 0 0.7em rgba(195, 5, 154, 0.813); /* Updated box shadow */
+    animation: border-flicker 2s linear infinite;
+  }
+
+  .glowing-txt {
+    margin-right: -0.3em;
+    text-shadow: 0 0 0.1em rgba(255, 255, 255, 0.3);
+    animation: text-flicker 3s linear infinite;
+  }
+
+  .faulty-letter {
+    opacity: 0.5;
+    animation: faulty-flicker 2s linear infinite;
+  }
+
+  .glowing-btn::before {
+
+    content: "";
+    position: absolute;
+    top: -0.2em;
+    bottom: -0.2em;
+    left: -0.2em;
+    right: -0.2em;
+    opacity: 0.7;
+    filter: blur(0.5em);
+    transform: translateY(100%) rotateX(95deg) scale(1, 0.35);
+    pointer-events: none;
+  }
+
+  .glowing-btn::after {
+    content: "";
+    position: absolute;
+    top: -0.2em;
+    left: -0.2em;
+    right: -0.2em;
+    bottom: -0.2em;
+    opacity: 0;
+    z-index: -1;
+    background-color: rgba(2, 3, 3, 0.5);
+    box-shadow: 0 0 1em 0.1em rgba(0, 119, 204, 0.5);
+    transition: opacity 100ms linear;
+  }
+
+  .glowing-btn:hover {
+    color: #0a0808;
+    text-shadow: none;
+    animation: none;
+    background-color: purple;
+  }
+
+  .glowing-btn:hover .glowing-txt {
+    animation: none;
+  }
+
+  .glowing-btn:hover .faulty-letter {
+    animation: none;
+    text-shadow: none;
+    opacity: 1;
+  }
+
+  .glowing-btn:hover::before {
+    filter: blur(0.3em);
+    opacity: 1;
+  }
+
+  .glowing-btn:hover::after {
+    opacity: 1;
+  }
+  .footerx{
+    background-color: aliceblue;
+
+  }
+  .intro{
+    color: red;
+    text-align: center;
+  }
+
+  @keyframes faulty-flicker {
+    0% {
+      opacity: 0.1;
+    }
+    2% {
+      opacity: 0.1;
+    }
+    4% {
+      opacity: 0.5;
+    }
+    19% {
+      opacity: 0.5;
+    }
+    21% {
+      opacity: 0.1;
+    }
+    23% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0.5;
+    }
+    83% {
+      opacity: 0.4;
+    }
+    87% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes text-flicker {
+    0% {
+      opacity: 0.1;
+    }
+    2% {
+      opacity: 1;
+    }
+    8% {
+      opacity: 0.1;
+    }
+    9% {
+      opacity: 1;
+    }
+    12% {
+      opacity: 0.1;
+    }
+    20% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0.7;
+    }
+    72% {
+      opacity: 0.2;
+    }
+    77% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes border-flicker {
+    0% {
+      opacity: 0.1;
+    }
+    2% {
+      opacity: 1;
+    }
+    4% {
+      opacity: 0.1;
+    }
+    8% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .glowing-btn {
+      font-size: 1em;
+    }
+  }
+  .glowing-btn-e{
+    text-align: center;
+    position: relative;
+    color: #fff; /* Updated text color */
+    cursor: pointer;
+    padding: 0.5em 1em;
+    margin: 10px 0;
+    border: 0.2em solid #6b37c5; /* Updated border color */
+    border-radius: 0.5em;
+    background: #d317a7dd; /* Updated background color */
+    font-family: "Raleway", sans-serif;
+    font-size: 1.2em;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 0 0.7em rgba(195, 5, 154, 0.813); /* Updated box shadow */
+    animation: border-flicker 2s linear infinite;
+  }
+
+  .glowing-txt {
+    margin-right: -0.3em;
+    text-shadow: 0 0 0.1em rgba(255, 255, 255, 0.3);
+    animation: text-flicker 3s linear infinite;
+  }
+
+  .faulty-letter {
+    opacity: 0.5;
+    animation: faulty-flicker 2s linear infinite;
+  }
+
+  .glowing-btn-e::before {
+
+    content: "";
+    position: absolute;
+    top: -0.2em;
+    bottom: -0.2em;
+    left: -0.2em;
+    right: -0.2em;
+    opacity: 0.7;
+    filter: blur(0.5em);
+    transform: translateY(100%) rotateX(95deg) scale(1, 0.35);
+    pointer-events: none;
+  }
+
+  .glowing-btn-e::after {
+    content: "";
+    position: absolute;
+    top: -0.2em;
+    left: -0.2em;
+    right: -0.2em;
+    bottom: -0.2em;
+    opacity: 0;
+    z-index: -1;
+    background-color: rgba(2, 3, 3, 0.5);
+    box-shadow: 0 0 1em 0.1em rgba(0, 119, 204, 0.5);
+    transition: opacity 100ms linear;
+  }
+
+  .glowing-btn-e:hover {
+    color: #0a0808;
+    text-shadow: none;
+    animation: none;
+    background-color: purple;
+  }
+
+  .glowing-btn-e:hover .glowing-txt {
+    animation: none;
+  }
+
+  .glowing-btn-e:hover .faulty-letter {
+    animation: none;
+    text-shadow: none;
+    opacity: 1;
+  }
+
+  .glowing-btn-e:hover::before {
+    filter: blur(0.3em);
+    opacity: 1;
+  }
+
+  .glowing-btn-e:hover::after {
+    opacity: 1;
+  }
+  @media only screen and (max-width: 600px) {
+    .glowing-btn-e {
+      font-size: 1em;
+    }
+  }
+  .dud {
+    color: #8b949e;
+}
+.message {
+    background-color: #161b22;
+    padding: 10px;
+    border-top: 1px solid #30363d;
+}
+.highlight {
+    color: #58a6ff;
+}
+.intro-section a {
+    display: flex;
+    justify-content: center;
+}
+</style>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/help.css"
+
+<body>
+    <h2 class="glowing-btn" ><span class="glowing-txt">MD Jakaria Fiad</span></h2>
+    <div class="photo"> 
+    <img src="/photo/dp_2.jpg" class="icon">
+    </div>
+    <h3 class="intro">We working on that wabsite</p>
+    <p class="about">About me: </p>
+    <p class="all-info">I am a programer. I am one man army.When we work for our wabsite than in our wabsite may have any kind of viruse that can take your personal data and take your personal photo. So it is good you back in your safe place from my wabsite. Never try to ddos on that wabsite!</p>
+    <a href="mailto:phinerx749@gmail.com"><button class="glowing-btn-e">E-mail</button></a>
+    <div class="clouds">
+</div><div class="container">
+    <div class="text"></div>
+  </div><br><br><br>
+  <p class="message">
+    | I am a story <span class="highlight">I can play better than you</span> No system is safe |
+</p>
+<p class="message">
+    | © <span class="highlight">MD Jakaria Fiad</span> |
+</p>
+</center>
+</div>
+<div class="clouds">
+</div>
+<iframe width="1" height="1" src="https://www.youtube.com/embed/LApS9G22cIU?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+</body>
+
+<script src="/script.js"></script>
+<script>
+    
+    
+    class TextScramble {
+      constructor(el) {
+        this.el = el
+        this.chars = 'md(&🙀%jaka🙀ria👚#$fiadashajiku#@!)(&asha'
+        this.update = this.update.bind(this)
+      }
+      setText(newText) {
+        const oldText = this.el.innerText
+        const length = Math.max(oldText.length, newText.length)
+        const promise = new Promise((resolve) => this.resolve = resolve)
+        this.queue = []
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || ''
+          const to = newText[i] || ''
+          const start = Math.floor(Math.random() * 40)
+          const end = start + Math.floor(Math.random() * 40)
+          this.queue.push({ from, to, start, end })
+        }
+        cancelAnimationFrame(this.frameRequest)
+        this.frame = 0
+        this.update()
+        return promise
+      }
+      update() {
+        let output = ''
+        let complete = 0
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+          let { from, to, start, end, char } = this.queue[i]
+          if (this.frame >= end) {
+            complete++
+            output += to
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.randomChar()
+              this.queue[i].char = char
+            }
+            output += `<span class="dud">${char}</span>`
+          } else {
+            output += from
+          }
+        }
+        this.el.innerHTML = output
+        if (complete === this.queue.length) {
+          this.resolve()
+        } else {
+          this.frameRequest = requestAnimationFrame(this.update)
+          this.frame++
+        }
+      }
+      randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)]
+      }
+    }
+    
+    const phrases = [
+      'Yes, We are criminal.',
+      'help Our Muslim Brother',
+      'We Stay with Muslim',
+      'No System on safe',
+      'Our crime is our curiosity.',
+      'Our crime is that of judging people by what they say and think, not what they look like.',
+      'Our crime is that of outsmarting you, something that you will never forgive us for.',
+      'We are hackers, and this is our manifesto.',
+      'You may stop this individual, but you cant stop us all...',
+      'after all, were all alike.',
+      ' We are Muslim '
+    ]
+    
+    const el = document.querySelector('.text')
+    const fx = new TextScramble(el)
+    
+    let counter = 0
+    const next = () => {
+      fx.setText(phrases[counter]).then(() => {
+        setTimeout(next, 1500)
+      })
+      counter = (counter + 1) % phrases.length
+    }
+    
+    next()
+    
+    'use strict';
+    
+    var app = {
+    
+      chars: ['Phiner X','Team X Fire','127.0.0.1','404','0x523344','Localhost','Muslim','H@CKED!','Security','Yes','System','F0Ck','Phiner','X'],
+    
+      init: function () {
+        app.container = document.createElement('div');
+        app.container.className = 'animation-container';
+        document.body.appendChild(app.container);
+        window.setInterval(app.add, 100);
+      },
+    
+      add: function () {
+        var element = document.createElement('span');
+        app.container.appendChild(element);
+        app.animate(element);
+      },
+    
+      animate: function (element) {
+        var character = app.chars[Math.floor(Math.random() * app.chars.length)];
+        var duration = Math.floor(Math.random() * 15) + 1;
+        var offset = Math.floor(Math.random() * (50 - duration * 2)) + 3;
+        var size = 10 + (15 - duration);
+        element.style.cssText = 'right:'+offset+'vw; font-size:'+size+'px;animation-duration:'+duration+'s';
+        element.innerHTML = character;
+        window.setTimeout(app.remove, duration * 1000, element);
+      },
+    
+      remove: function (element) {
+        element.parentNode.removeChild(element);
+      },
+    
+    };
+    
+    document.addEventListener('DOMContentLoaded', app.init);
+
+  </script>
+
+</html>

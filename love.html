@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator</title>
+    <meta name="language" content="English">
+    <meta name="theme-color" content="#000">
+    <meta name="title" content="Love Calculator">
+    <meta name="description" content="Calculate your love percentage">
+    <meta property="og:image" content="dp.jpg">
+    <link rel="icon" type="image" href="dp_2.jpg">
+    <link rel="stylesheet" href="/extra.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Raleway");
+
+        :root {
+            --glow-color: hsl(292, 100%, 69%);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-image: url("https://i.guim.co.uk/img/media/d0105731685e5b2b3daecf2fa00c9affaba832f1/0_0_2560_1536/master/2560.jpg?width=1900&dpr=2&s=none");
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: "Raleway", sans-serif;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .icon {
+            width: 150px;
+            height: 150px;
+            margin-top: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .glowing-btn {
+            position: relative;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5em 1em;
+            margin: 10px 0;
+            border: 0.2em solid #0077cc;
+            border-radius: 0.5em;
+            background: #0077cc;
+            font-size: 1.2em;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 0 0.5em rgba(0, 119, 204, 0.5);
+            animation: border-flicker 2s linear infinite;
+        }
+
+        .glowing-btn:hover {
+            animation: none;
+        }
+
+        .glowing-btn::before, .glowing-btn::after {
+            content: "";
+            position: absolute;
+            top: -0.2em;
+            bottom: -0.2em;
+            left: -0.2em;
+            right: -0.2em;
+            background: rgba(0, 119, 204, 0.5);
+            pointer-events: none;
+        }
+
+        .glowing-btn:hover::before, .glowing-btn:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes border-flicker {
+            0% { opacity: 0.1; }
+            2% { opacity: 1; }
+            4% { opacity: 0.1; }
+            8% { opacity: 1; }
+            70% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
+.btn{
+font-family: Roboto, sans-serif;
+font-weight: 0;
+font-size: 20px;
+color: #fff;
+background: linear-gradient(90deg, #0066CC 0%, #c500cc 100%);
+padding: 10px 20px;
+border: 2px solid #0066cc;
+box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+border-radius: 50px;
+transition : 1000ms;
+transform: translateY(0);
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
+}
+
+.btn:hover{
+transition : 1000ms;
+padding: 10px 50px;
+transform : translateY(-0px);
+background: linear-gradient(90deg, #0066CC 0%, #c500cc 100%);
+color: #0066cc;
+border: solid 2px #0066cc;
+}
+.css-input {
+    padding: 11px;
+    font-size: 18px;
+    border-width: 3px;
+    border-color: #aa7da6;
+    background-color: #e598d3;
+    color: #140505;
+    border-style: solid;
+    border-radius: 3px;
+    box-shadow: -8px 0px 5px rgba(66,66,66,.75);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+}
+.css-input:focus {
+    outline:none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/photo/dp_2.jpg" class="icon" alt="Icon Image">
+        <hr>
+        <h1 class="headx">Love Calculator</h1>
+        <form id="loveForm" onsubmit="return calculateLove(event)">
+            <input type="text" id="name1" placeholder="Your Name" class="css-input" required>
+            <br><br>
+            <input type="text" id="name2" placeholder="Their Name" class="css-input" required>
+            <br><br>
+            <button type="submit" class="btn">
+                <img src="https://www.htmlcssbuttongenerator.com/iconExample-gear-thin.svg" style="width:25px;height: 20px; margin-left:50px; margin-right:4px;">
+                Calculate
+            </button>
+        </form>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function calculateLove(event) {
+            event.preventDefault();  // Prevent the form from submitting
+
+            var name1 = document.getElementById('name1').value;
+            var name2 = document.getElementById('name2').value;
+
+            if (name1 === "" || name2 === "") {
+                alert("Please enter both names.");
+                return false;
+            }
+
+            // Simple love percentage calculation based on character codes
+            var loveScore = Math.floor((name1.length + name2.length) / 2 * Math.random() * 100);
+
+            document.getElementById('result').innerText = "Love Percentage: " + loveScore + "%";
+            return false;  // Prevent the default form submission
+        }
+    </script>
+</body>
+</html>
